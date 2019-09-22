@@ -12,12 +12,18 @@ typedef	struct
 
 typedef	struct
 {
-	struct winsize ws;
-	coordinates center;
-	double scale;
+	struct winsize	ws;
+	int		scale_x;
+	int		scale_y;
 }	coordinate_system;
 
-void	init_coordinate_system(coordinate_system *cs, coordinates center, double scale);
-void	graph_line(coordinate_system cs, size_t m, size_t b);
+# define LEFT(cs) - cs.ws.ws_col / 2
+# define UP(cs) cs.ws.ws_row / 2
+# define RIGHT(cs) cs.ws.ws_col / 2
+# define DOWN(cs) - cs.ws.ws_row / 2
+# define SCALE(x, s) (x / s)
+
+void	init_coordinate_system(coordinate_system *cs, int scale_x, int scale_y);
+void	graph_line(coordinate_system cs, double m, double b);
 
 #endif

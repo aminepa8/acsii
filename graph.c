@@ -1,13 +1,17 @@
 #include "acsii.h"
 
-void	graph_line(coordinate_system cs, size_t m, size_t b)
+void	graph_line(coordinate_system cs, double m, double b)
 {
-	for (int i = 0; i < cs.ws.ws_col; i++)
+	for (int i = UP(cs); i > DOWN(cs); i--)
 	{
-		for (int j = 0; j < cs.ws.ws_col; j++)
+		for (int j = LEFT(cs); j < RIGHT(cs); j++)
 		{
 			if (i == j * m + b)
 				putchar('.');
+			else if (i == 0)
+				putchar('-');
+			else if (j == 0)
+				putchar('|');
 			else
 				putchar(' ');
 		}
